@@ -156,7 +156,7 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 					// Init history
 					if( _.isUndefined(data.history) )
 					{
-						data.history = new Array(40);
+						data.history = new Array(MAX_BINS*2);
 						_.fill(data.history, -1);
 					}
 
@@ -443,7 +443,7 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 
 		if( _.isUndefined(data.history) )
 		{
-			data.history = new Array(40);
+			data.history = new Array(MAX_BINS*2);
 			_.fill(data.history, -1);
 		}
 

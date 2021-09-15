@@ -22,9 +22,9 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 	$scope.bestStats = {};
 
 	$scope.lastGasLimit = _.fill(Array(MAX_BINS), 2);
-	$scope.lastBlocksTime = _.fill(Array(MAX_BINS), 2);
+	$scope.lastBlocksTime = _.fill(Array(MAX_BINS*2), 2);
 	$scope.difficultyChart = _.fill(Array(MAX_BINS), 2);
-	$scope.transactionDensity = _.fill(Array(MAX_BINS), 2);
+	$scope.transactionDensity = _.fill(Array(MAX_BINS*2), 2);
 	$scope.gasSpending = _.fill(Array(MAX_BINS), 2);
 	$scope.miners = [];
 
@@ -335,7 +335,7 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 				if( !_.isEqual($scope.lastGasLimit, data.gasLimit) && data.gasLimit.length >= MAX_BINS )
 					$scope.lastGasLimit = data.gasLimit;
 
-				if( !_.isEqual($scope.lastBlocksTime, data.blocktime) && data.blocktime.length >= MAX_BINS )
+				if( !_.isEqual($scope.lastBlocksTime, data.blocktime) && data.blocktime.length >= MAX_BINS*2 )
 					$scope.lastBlocksTime = data.blocktime;
 
 				if( !_.isEqual($scope.difficultyChart, data.difficulty) && data.difficulty.length >= MAX_BINS )
@@ -353,7 +353,7 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 					$scope.uncleCountChart = data.uncleCount;
 				}
 
-				if( !_.isEqual($scope.transactionDensity, data.transactions) && data.transactions.length >= MAX_BINS )
+				if( !_.isEqual($scope.transactionDensity, data.transactions) && data.transactions.length >= MAX_BINS*2 )
 					$scope.transactionDensity = data.transactions;
 
 				if( !_.isEqual($scope.gasSpending, data.gasSpending) && data.gasSpending.length >= MAX_BINS )

@@ -21,9 +21,9 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, socket, _, toastr)
 	$scope.uncleCount = 0;
 	$scope.bestStats = {};
 
-	$scope.lastBlocksTime = _.fill(Array(MAX_BINS), 2);
+	$scope.lastBlocksTime = _.fill(Array(MAX_BINS*2), 2);
 	$scope.difficultyChart = _.fill(Array(MAX_BINS), 2);
-	$scope.transactionDensity = _.fill(Array(MAX_BINS), 2);
+	$scope.transactionDensity = _.fill(Array(MAX_BINS*2), 2);
 	$scope.gasSpending = _.fill(Array(MAX_BINS), 2);
 	$scope.miners = [];
 

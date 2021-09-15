@@ -29,9 +29,9 @@ Blockchain.insert({
 	uncleCount: 0,
 	bestStats: {},
 
-	lastBlocksTime: _.fill(Array(MAX_BINS), 2),
+	lastBlocksTime: _.fill(Array(MAX_BINS*2), 2),
 	difficultyChart: _.fill(Array(MAX_BINS), 2),
-	transactionDensity: _.fill(Array(MAX_BINS), 2),
+	transactionDensity: _.fill(Array(MAX_BINS*2), 2),
 	gasSpending: _.fill(Array(MAX_BINS), 2),
 	miners: [],
 
@@ -362,7 +362,7 @@ function socketAction(action, data)
 			if( !_.isEqual(meta.avgHashrate, data.avgHashrate) )
 				meta.avgHashrate = data.avgHashrate;
 
-			if( !_.isEqual(meta.lastBlocksTime, data.blocktime) && data.blocktime.length >= MAX_BINS )
+			if( !_.isEqual(meta.lastBlocksTime, data.blocktime) && data.blocktime.length >= MAX_BINS*2 )
 				meta.lastBlocksTime = data.blocktime;
 
 			if( !_.isEqual(meta.difficultyChart, data.difficulty) && data.difficulty.length >= MAX_BINS )
@@ -380,7 +380,7 @@ function socketAction(action, data)
 				meta.uncleCountChart = data.uncleCount;
 			}
 
-			if( !_.isEqual(meta.transactionDensity, data.transactions) && data.transactions.length >= MAX_BINS )
+			if( !_.isEqual(meta.transactionDensity, data.transactions) && data.transactions.length >= MAX_BINS*2 )
 				meta.transactionDensity = data.transactions;
 
 			if( !_.isEqual(meta.gasSpending, data.gasSpending) && data.gasSpending.length >= MAX_BINS )

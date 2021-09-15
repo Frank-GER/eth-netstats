@@ -4,7 +4,7 @@ extends ./layout.jade
 block content
   div.container-fluid(ng-controller='StatsCtrl')
     div.row(ng-cloak)
-      div.col-xs-2.stat-holder
+      div.col-xs-4.stat-holder
         div.big-info.bestblock.text-info
           div.pull-left.icon-full-width
             i.icon-block
@@ -12,16 +12,7 @@ block content
             span.small-title best block
             span.big-details {{'#'}}{{ bestBlock | number}}
           div.clearfix
-      div.col-xs-2.stat-holder
-        div.big-info.uncleCount.text-info
-          div.pull-left.icon-full-width
-            i.icon-uncle
-          div.big-details-holder
-            span.small-title uncles&nbsp;
-              span.small (current / last 50)
-            span.big-details {{ bestStats.block.uncles.length }}/{{ uncleCount }}
-          div.clearfix
-      div.col-xs-2.stat-holder
+      div.col-xs-4.stat-holder
         div.big-info.blocktime(class="{{ lastBlock | timeClass : true }}")
           div.pull-left.icon-full-width
             i.icon-time
@@ -30,30 +21,13 @@ block content
             span.big-details {{ lastBlock | blockTimeFilter }}
             //- span.big-details(time-ago="lastBlock")
           div.clearfix
-      div.col-xs-2.stat-holder
+      div.col-xs-4.stat-holder
         div.big-info.avgblocktime(class="{{ avgBlockTime | avgTimeClass }}")
           div.pull-left.icon-full-width
             i.icon-gas
           div.big-details-holder
             span.small-title avg block time
             span.big-details {{ avgBlockTime | avgTimeFilter }}
-          div.clearfix
-      div.col-xs-2.stat-holder
-        div.big-info.difficulty.text-orange
-          div.pull-left.icon-full-width
-            i.icon-hashrate
-          div.big-details-holder
-            span.small-title avg network hashrate
-            span.big-details(ng-bind-html="avgHashrate | networkHashrateFilter")
-          div.clearfix
-      div.col-xs-2.stat-holder
-        div.big-info.difficulty.text-danger
-          div.pull-left.icon-full-width
-            i.icon-difficulty
-          div.big-details-holder
-            span.small-title difficulty
-            span.big-details
-              span.small-hash {{ lastDifficulty | totalDifficultyFilter }}
           div.clearfix
 
       div.clearfix
@@ -92,19 +66,19 @@ block content
         div.row
           div.col-xs-8
             div.row
-              div.col-xs-3.stat-holder
+              div.col-xs-6.stat-holder
                 div.big-info.chart(class="{{ avgBlockTime | avgTimeClass }}")
                   //- i.icon-time
                   span.small-title block time
                   //- span.small-value {{ avgBlockTime | avgTimeFilter }}
                   sparkchart.big-details.spark-blocktimes(data="{{lastBlocksTime.join(',')}}", tooltipsuffix="s")
-
-              div.col-xs-3.stat-holder
+              
+              div.col-xs-6.stat-holder
                 div.big-info.chart.text-info
-                  //- i.icon-difficulty
-                  span.small-title difficulty
-                  //- span.small-value {{ lastDifficulty | number }}
-                  sparkchart.big-details.spark-difficulty(data="{{difficultyChart.join(',')}}")
+                  //- i.icon-uncle
+                  span.small-title transactions
+                  sparkchart.big-details.spark-transactions(data="{{transactionDensity.join(',')}}")
+
 
               div.col-xs-3.stat-holder.xpull-right
                 div.big-info.chart.xdouble-chart(class="{{ blockPropagationAvg | propagationAvgTimeClass : true }}")
@@ -123,19 +97,6 @@ block content
                     minerblock(blocks="{{miner.blocks}}")
                     div.clearfix
 
-              div.col-xs-3.stat-holder
-                div.big-info.chart.text-info
-                  //- i.icon-uncle
-                  span.small-title uncle count&nbsp;
-                    span.small (25 blocks per bar)
-                  //- span.small-value {{ bestStats.block.uncles.length }}/{{ uncleCount }}
-                  sparkchart.big-details.spark-uncles(data="{{uncleCountChart.join(',')}}")
-
-              div.col-xs-3.stat-holder
-                div.big-info.chart.text-info
-                  //- i.icon-uncle
-                  span.small-title transactions
-                  sparkchart.big-details.spark-transactions(data="{{transactionDensity.join(',')}}")
 
               div.col-xs-3.stat-holder
                 div.big-info.chart.text-info
@@ -163,7 +124,7 @@ block content
             div.active-nodes.text-warning
               i.icon-warning-o
               span.small-title ATTENTION!
-              span.small-value This page does not represent the entire state of the ethereum network - listing a node on this page is a voluntary process.
+              span.small-value This page does not represent the entire state of the NEVM network - listing a node on this page is a voluntary process.
           //- div.col-xs-12.stat-holder.box
           //-   div.active-nodes.text-danger
           //-     i.icon-hashrate
